@@ -2,26 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @apply bg-background;
+}
+
+.prose h1 {
+  @apply text-5xl text-white font-semibold py-4;
+}
+
+.prose h2 {
+  @apply text-4xl text-white font-semibold py-4;
+}
+
+.prose h3 {
+  @apply text-3xl text-white font-semibold py-4;
+}
+
+.prose h4 {
+  @apply text-2xl text-white font-semibold py-4;
+}
+
+.prose h5 {
+  @apply text-xl text-white font-semibold py-4;
+}
+
+.prose h6 {
+  @apply text-lg text-white font-semibold py-4;
+}
+
+.prose p {
+  @apply text-white opacity-90 py-2;
+  font-size: 1.05rem;
+  line-height: 1.8rem;
+}
+
+.prose a {
+  @apply text-accent underline;
+}
+
+.prose pre {
+  @apply bg-accent p-4 rounded-md border border-gray-600 overflow-auto my-4;
+}
+
+.prose ul {
+  @apply list-disc;
+}
+
+.prose ol {
+  @apply list-decimal;
+}
+
+.prose li {
+  @apply py-2 text-[#FFFFFF] opacity-90;
+}
+
+.prose code {
+  @apply bg-accent py-1 px-1.5 rounded-md border border-gray-700 text-sm;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 rounded-none border-none text-white opacity-90;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-accent pl-4 bg-accent my-4;
 }
