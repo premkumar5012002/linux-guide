@@ -1,6 +1,14 @@
 import { TreeNode } from "@/types/TreeNode";
-import { Lesson, allLessons } from "contentlayer/generated";
+import { allLessons } from "contentlayer/generated";
 import { PathSegment } from "@/types/PathSegment";
+
+function sortTreeNode(treeNode: TreeNode[]) {
+  treeNode.sort((a, b) => a.order - b.order);
+
+  treeNode.forEach((node) => {
+    sortTreeNode(node.children);
+  });
+}
 
 function findLesson(pathName: string) {
   return allLessons.find(
@@ -23,6 +31,7 @@ function findOrCreateNode(
     const lesson = findLesson(pathSegament.pathName);
 
     node = {
+      order: pathSegament.order,
       label: lesson?.label ?? pathSegament.pathName,
       urlPath: lesson?.url_path,
       pathName: pathSegament.pathName,
@@ -51,6 +60,8 @@ export function buildLessonTree() {
       parentNode = findOrCreateNode(pathSegament, treeNode, parentNode);
     });
   });
+
+  sortTreeNode(treeNode);
 
   return treeNode;
 }

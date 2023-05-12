@@ -25,7 +25,7 @@ export default async function Page({
 
   return (
     <main>
-      <article className="mx-auto max-w-2xl">
+      <article className="max-w-2xl mx-auto lg:mx-0">
         <LinuxLesson data={data} />
       </article>
     </main>

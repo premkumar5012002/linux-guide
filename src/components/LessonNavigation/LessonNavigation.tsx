@@ -9,7 +9,7 @@ import { TreeNode } from "@/types/TreeNode";
 
 function LessonNavigation({ treeNode }: { treeNode: TreeNode[] }) {
   return (
-    <aside className="px-4">
+    <aside>
       <Tree tree={treeNode} level={0} />
     </aside>
   );
@@ -68,8 +68,6 @@ const NavLink: FC<{
   label: string;
   activePath: string;
 }> = ({ label, url, level, activePath }) => {
-  console.log("Active Path", activePath, "Url", url);
-
   return (
     <div className="flex items-center">
       {url ? (
@@ -86,12 +84,21 @@ const NavLink: FC<{
           <span>{label}</span>
         </Link>
       ) : (
-        <div className="text-xs font-semibold w-full px-2.5 py-2.5 rounded-md border border-transparent text-gray-200">
-          <span>{label.replaceAll("-", " ").toUpperCase()}</span>
+        <div className="text-sm font-medium w-full px-2.5 py-2.5 rounded-md border border-transparent text-gray-200">
+          <span>
+            {label
+              .split("-")
+              .map((text) => firstLetterToUpperCase(text))
+              .join(" ")}
+          </span>
         </div>
       )}
     </div>
   );
 };
+
+function firstLetterToUpperCase(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 export default LessonNavigation;
