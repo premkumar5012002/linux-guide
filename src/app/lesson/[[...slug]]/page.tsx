@@ -4,8 +4,12 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import { Lesson, allLessons } from "contentlayer/generated";
 
 const getLessons = (slug: string | string[] | undefined) => {
-  const url_path = typeof slug === "string" ? slug : slug?.join("/") ?? "";
-  return allLessons.find((lesson) => lesson.url_path === `/lesson/${url_path}`);
+  const path = typeof slug === "string" ? slug : slug?.join("/") ?? "";
+  return allLessons.find((lesson) => {
+    return (
+      lesson.url_path === (path.length > 0 ? `/lesson/${path}` : "/lesson")
+    );
+  });
 };
 
 export default async function Page({
@@ -21,7 +25,7 @@ export default async function Page({
 
   return (
     <main>
-      <article className="mx-auto max-w-2xl py-12">
+      <article className="mx-auto max-w-2xl">
         <LinuxLesson data={data} />
       </article>
     </main>
@@ -31,7 +35,7 @@ export default async function Page({
 function LinuxLesson({ data }: { data: Lesson }) {
   const MDXContent = useMDXComponent(data.body.code);
   return (
-    <div className="px-4 w-full space-y-6">
+    <div className="w-full space-y-6">
       <h1 className="text-4xl font-semibold text-white">{data.title}</h1>
       <div className="prose">
         <MDXContent />

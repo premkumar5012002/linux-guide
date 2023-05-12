@@ -6,11 +6,15 @@ import LessonNavigation from "@/components/LessonNavigation/LessonNavigation";
 export default function Layout(props: PropsWithChildren) {
   const tree = buildLessonTree();
   return (
-    <div className="relative mx-auto w-full max-w-screen-2xl pt-16">
-      <div className="hidden lg:block fixed z-50 overflow-y-auto">
-        <LessonNavigation treeNode={tree} />
+    <div className="mx-auto w-full max-w-screen-2xl pt-16 block lg:flex 2xl:block">
+      <div className="fixed z-50 py-8 border-r border-gray-800 w-80 hidden lg:block h-[calc(100vh-64px)]">
+        <div className="overflow-y-auto">
+          <LessonNavigation treeNode={tree} />
+        </div>
       </div>
-      <div>{props.children}</div>
+      <div className="py-8 px-8 lg:px-12 2xl:px-0 lg:ml-80 2xl:ml-0">
+        {props.children}
+      </div>
     </div>
   );
 }

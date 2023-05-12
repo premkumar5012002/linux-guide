@@ -1,15 +1,15 @@
 "use client";
 
-import cntl from "cntl";
-import Link from "next/link";
 import { FC } from "react";
+import Link from "next/link";
+import classNames from "classnames";
 import { usePathname } from "next/navigation";
 
 import { TreeNode } from "@/types/TreeNode";
 
 function LessonNavigation({ treeNode }: { treeNode: TreeNode[] }) {
   return (
-    <aside className="w-80 py-10 border-r border-gray-700 px-4 min-h-screen">
+    <aside className="px-4">
       <Tree tree={treeNode} level={0} />
     </aside>
   );
@@ -18,23 +18,21 @@ function LessonNavigation({ treeNode }: { treeNode: TreeNode[] }) {
 const Tree: FC<{ tree: TreeNode[]; level: number }> = ({ tree, level }) => {
   const activePath = usePathname();
 
-  const TreeClass = cntl`
-    ${
-      level === 0
-        ? "space-y-2"
-        : "border-l border-gray-700 space-y-2 ml-3 pl-2.5"
-    }
-  `;
-
   if (activePath === null) return null;
 
   return (
-    <div className={TreeClass}>
+    <div
+      className={classNames(
+        level === 0
+          ? "space-y-2"
+          : "border-l border-gray-700 space-y-2 ml-3 pl-2.5"
+      )}
+    >
       {tree.map((treeNode, index) => (
         <Node
           key={index}
-          node={treeNode}
           level={level}
+          node={treeNode}
           activePath={activePath}
         />
       ))}
@@ -70,35 +68,23 @@ const NavLink: FC<{
   label: string;
   activePath: string;
 }> = ({ label, url, level, activePath }) => {
-  const whenActive = cntl`
-    text-white text-sm font-medium
-    bg-accent shadow-md w-full px-2.5 py-1.5 
-    rounded-md border border-gray-700
-  `;
-
-  const whenInactive = cntl`
-    text-sm font-medium
-    hover:bg-secondary w-full px-2.5 py-1.5 
-    rounded-md border border-transparent
-    ${level === 0 ? "text-gray-300" : "text-gray-400"}
-  `;
-
-  let isPathActive = true;
-
-  if (activePath !== url) {
-    if (`${activePath}/` !== url) {
-      isPathActive = false;
-    }
-  }
-
   return (
     <div className="flex items-center">
       {url ? (
-        <Link href={url} className={isPathActive ? whenActive : whenInactive}>
+        <Link
+          href={url}
+          className={classNames(
+            activePath === url
+              ? `text-white text-sm font-medium bg-accent shadow-md w-full px-2.5 py-1.5 rounded-md border border-gray-700`
+              : `text-sm font-medium hover:bg-secondary w-full px-2.5 py-1.5 rounded-md border border-transparent ${
+                  level === 0 ? "text-gray-200" : "text-gray-400"
+                }`
+          )}
+        >
           <span>{label}</span>
         </Link>
       ) : (
-        <div className={whenInactive}>
+        <div className="text-white text-sm font-medium bg-accent shadow-md w-full px-2.5 py-1.5 rounded-md border border-gray-700">
           <span>{label}</span>
         </div>
       )}
