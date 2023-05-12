@@ -16,22 +16,33 @@ export default function MainNavbar() {
           <span className="text-white font-semibold">Linuxguide</span>
         </Link>
         <div className="flex items-center divide-x divide-gray-600">
-          {/* Search bar */}
-          <button
-            type="button"
-            className="flex items-center bg-accent pl-2 pr-20 py-2 rounded-md border border-gray-600 mr-4"
-          >
-            <div className="flex items-center text-gray-300 gap-1.5">
-              <IconSearch className="w-5 h-5" />
-              <span className="text-sm font-medium">
-                Type
-                <span className="border border-gray-600 mx-1.5 px-1.5 py-1 rounded-md text-xs">
-                  /
+          {/* Search Bar */}
+          <div>
+            {/* Mobile */}
+            <button
+              type="button"
+              title="Search Bar"
+              className="mr-4 text-gray-500 block lg:hidden"
+            >
+              <IconSearch />
+            </button>
+            {/* Desktop */}
+            <button
+              type="button"
+              className="hidden lg:flex items-center bg-accent pl-2 pr-20 py-2 rounded-md border border-gray-600 mr-4"
+            >
+              <div className="flex items-center text-gray-300 gap-1.5">
+                <IconSearch className="w-5 h-5" />
+                <span className="text-sm font-medium">
+                  Type
+                  <span className="border border-gray-600 mx-1.5 px-1.5 py-1 rounded-md text-xs">
+                    /
+                  </span>
+                  to search
                 </span>
-                to search
-              </span>
-            </div>
-          </button>
+              </div>
+            </button>
+          </div>
           {/* Social */}
           <button
             title="Project Repository"

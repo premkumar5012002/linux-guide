@@ -68,6 +68,8 @@ const NavLink: FC<{
   label: string;
   activePath: string;
 }> = ({ label, url, level, activePath }) => {
+  console.log("Active Path", activePath, "Url", url);
+
   return (
     <div className="flex items-center">
       {url ? (
@@ -76,7 +78,7 @@ const NavLink: FC<{
           className={classNames(
             activePath === url
               ? `text-white text-sm font-medium bg-accent shadow-md w-full px-2.5 py-1.5 rounded-md border border-gray-700`
-              : `text-sm font-medium hover:bg-secondary w-full px-2.5 py-1.5 rounded-md border border-transparent ${
+              : `text-sm font-medium hover:bg-accent w-full px-2.5 py-1.5 rounded-md border border-transparent ${
                   level === 0 ? "text-gray-200" : "text-gray-400"
                 }`
           )}
@@ -84,8 +86,8 @@ const NavLink: FC<{
           <span>{label}</span>
         </Link>
       ) : (
-        <div className="text-white text-sm font-medium bg-accent shadow-md w-full px-2.5 py-1.5 rounded-md border border-gray-700">
-          <span>{label}</span>
+        <div className="text-xs font-semibold w-full px-2.5 py-2.5 rounded-md border border-transparent text-gray-200">
+          <span>{label.replaceAll("-", " ").toUpperCase()}</span>
         </div>
       )}
     </div>

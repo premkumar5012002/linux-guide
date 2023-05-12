@@ -12,7 +12,7 @@ export default function Layout(props: PropsWithChildren) {
           <LessonNavigation treeNode={tree} />
         </div>
       </div>
-      <div className="py-8 px-8 lg:px-12 2xl:px-0 lg:ml-80 2xl:ml-0">
+      <div className="py-8 px-6 md:px-0 lg:px-12 2xl:px-0 lg:ml-80 xl:ml-[440px] 2xl:ml-0">
         {props.children}
       </div>
     </div>
