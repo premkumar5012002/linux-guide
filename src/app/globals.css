@@ -23,21 +23,21 @@ body {
 }
 
 .prose h5 {
-  @apply text-xl text-white font-semibold py-4;
+  @apply text-xl text-white font-semibold py-2;
 }
 
 .prose h6 {
-  @apply text-lg text-white font-semibold py-4;
+  @apply text-lg text-white font-semibold py-2;
 }
 
 .prose p {
   @apply text-white opacity-90 py-2;
   font-size: 1.05rem;
-  line-height: 1.8rem;
+  line-height: 2rem;
 }
 
 .prose a {
-  @apply text-accent underline;
+  @apply text-white underline;
 }
 
 .prose pre {
@@ -57,7 +57,7 @@ body {
 }
 
 .prose code {
-  @apply bg-accent py-1 px-1.5 rounded-md border border-gray-700 text-sm;
+  @apply bg-accent pt-1.5 pb-1 px-2 rounded-md border border-gray-700 text-sm;
 }
 
 .prose pre code {
