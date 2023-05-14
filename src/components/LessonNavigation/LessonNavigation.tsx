@@ -27,7 +27,7 @@ const Tree: FC<{ tree: TreeNode[]; level: number }> = ({ tree, level }) => {
       className={classNames(
         level === 0
           ? "space-y-2"
-          : "border-l border-gray-700 space-y-2 ml-3 pl-2.5"
+          : "border-l border-outline space-y-2 ml-3 pl-2.5"
       )}
     >
       {tree.map((treeNode, index) => (
@@ -103,9 +103,9 @@ const NavLink: FC<{
       className={classNames(
         "flex items-center justify-between",
         activePath === url
-          ? `text-white text-sm font-medium bg-accent shadow-md w-full px-2.5 py-1.5 rounded-md border border-gray-700`
+          ? `text-white text-sm font-medium bg-accent shadow-md w-full px-2.5 py-1.5 rounded-md border border-outline-accent`
           : `text-sm font-medium hover:bg-accent w-full px-2.5 py-1.5 rounded-md border border-transparent ${
-              level === 0 ? "text-gray-200" : "text-gray-400"
+              level === 0 ? "text-white" : "text-gray-300"
             }`
       )}
     >
@@ -125,12 +125,17 @@ const NavLink: FC<{
       )}
     </Link>
   ) : (
-    <div className="flex items-center justify-between text-sm font-medium w-full px-2.5 py-1.5 rounded-md border border-transparent text-gray-200">
+    <div
+      className={`flex items-center justify-between text-sm font-medium w-full px-2.5 py-1.5 rounded-md border border-transparent ${
+        level === 0 ? "text-white" : "text-gray-300"
+      }`}
+    >
       <span>{firstLetterToUpperCase(label)}</span>
       {collapsible && (
         <button
           type="button"
           title="Toggle Collapsed"
+          className="hover:bg-accent rounded-md p-1"
           onClick={toggleCollapsed}
         >
           {collapsed ? (

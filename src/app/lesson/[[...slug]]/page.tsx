@@ -39,7 +39,7 @@ function LinuxLesson({ data }: { data: Lesson }) {
   const MDXContent = useMDXComponent(data.body.code);
   return (
     <div className="w-full space-y-8">
-      <div className="border-b-[0.5px] border-gray-700">
+      <div className="border-b border-outline">
         <h1 className="text-4xl font-semibold text-white pb-6">{data.title}</h1>
       </div>
       <div className="prose">

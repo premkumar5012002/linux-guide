@@ -22,7 +22,7 @@ export default function SearchModal({
   return (
     <section className="fixed z-50 inset-0 w-full flex justify-center bg-[#000000E1] py-12 px-4">
       <div className="flex flex-col max-w-3xl w-full">
-        <div className="flex items-center justify-between text-gray-300 border-b border-gray-700 bg-accent px-6 py-4 rounded-t-md">
+        <div className="flex items-center justify-between text-gray-300 border-b border-outline bg-background px-6 py-4 rounded-t-md">
           <div className="flex items-center gap-4">
             <SearchIcon className="w-6 h-6" />
             <input
@@ -39,11 +39,12 @@ export default function SearchModal({
             <X className="w-5 h-5" />
           </button>
         </div>
-        <div className="flex flex-col gap-2 py-4 h-96 overflow-y-auto bg-accent rounded-b-md">
+        <div className="flex flex-col gap-2 py-4 h-96 overflow-y-auto bg-background rounded-b-md">
           {filteredLessons.map((lesson) => (
             <Link
+              key={lesson.url}
               href={lesson.url}
-              className="hover:bg-slate-600 px-6 py-2"
+              className="hover:bg-accent px-6 py-2"
               onClick={close}
             >
               <span className="text-sm text-gray-400">

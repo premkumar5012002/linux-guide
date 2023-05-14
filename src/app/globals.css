@@ -31,33 +31,33 @@ body {
 }
 
 .prose p {
-  @apply text-white opacity-90 py-2;
+  @apply text-gray-300 py-1;
   font-size: 1.05rem;
   line-height: 2rem;
 }
 
 .prose a {
-  @apply text-white underline;
+  @apply text-white font-bold underline;
 }
 
 .prose pre {
-  @apply bg-accent p-4 rounded-md border border-gray-600 overflow-auto my-4;
+  @apply bg-accent p-4 rounded-md border border-outline-accent overflow-auto my-4;
 }
 
 .prose ul {
-  @apply list-disc;
+  @apply list-disc pl-4;
 }
 
 .prose ol {
-  @apply list-decimal;
+  @apply list-decimal pl-4;
 }
 
 .prose li {
-  @apply py-2 text-[#FFFFFF] opacity-90;
+  @apply py-2 text-gray-300;
 }
 
 .prose code {
-  @apply bg-accent pt-1.5 pb-1 px-2 rounded-md border border-gray-700 text-sm;
+  @apply bg-accent pt-1 pb-0.5 px-2 rounded-md border border-outline-accent text-sm;
 }
 
 .prose pre code {

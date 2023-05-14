@@ -35,8 +35,8 @@ export default function Navbar({ searchData }: { searchData: Search[] }) {
 
   return (
     <>
-      <nav className="fixed z-40 px-4 border-b border-gray-800 w-full">
-        <div className="flex items-center justify-between max-w-screen-2xl m-auto h-16 bg-background">
+      <nav className="fixed z-40 px-4 border-b border-outline w-full bg-background">
+        <div className="flex items-center justify-between max-w-screen-2xl m-auto h-16">
           <LinuxGuideLogo />
           <div className="flex items-center divide-x divide-gray-600">
             <div className="mr-4">
@@ -77,14 +77,14 @@ function SearchButton({ onClick }: { onClick: () => void }) {
 function SearchBox({ onClick }: { onClick: () => void }) {
   return (
     <div
-      className="hidden lg:flex items-center bg-accent pl-2 pr-20 py-2 rounded-md border border-gray-600 cursor-text"
+      className="hidden lg:flex items-center bg-accent pl-2 pr-20 py-2 rounded-md border border-outline-accent cursor-text"
       onClick={onClick}
     >
       <div className="flex items-center text-gray-300 gap-1.5">
         <IconSearch className="w-5 h-5" />
         <span className="text-sm font-medium">
           Type
-          <span className="border border-gray-600 mx-1.5 px-1.5 py-1 rounded-md text-xs">
+          <span className="border border-outline-accent mx-1.5 px-1.5 py-1 rounded-md text-xs">
             /
           </span>
           to search
@@ -97,9 +97,13 @@ function SearchBox({ onClick }: { onClick: () => void }) {
 function Links() {
   return (
     <div className="flex item-center gap-3 pl-4">
-      <button type="button" title="Github Repository" className="text-gray-500">
+      <Link
+        target="_blank"
+        href="https://github.com/premkumar5012002/linux-guide"
+        className="text-gray-400"
+      >
         <IconBrandGithub />
-      </button>
+      </Link>
     </div>
   );
 }

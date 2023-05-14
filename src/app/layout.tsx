@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import "./globals.css";
 import { allLessons } from "contentlayer/generated";
 import { Search } from "@/types/Search";
+import { PathSegment } from "@/types/PathSegment";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,13 +15,33 @@ export const metadata = {
 };
 
 const getSearchData = (): Search[] => {
-  return allLessons.map((lesson) => {
-    return {
-      title: lesson.title,
-      url: lesson.url_path,
-      pathSegaments: lesson.pathSegments,
-    };
-  });
+  return allLessons
+    .map((lesson) => {
+      return {
+        title: lesson.title,
+        url: lesson.url_path,
+        pathSegaments: lesson.pathSegments,
+      };
+    })
+    .sort((first, second) => {
+      const firstPaths: PathSegment[] = first.pathSegaments;
+      const secondPaths: PathSegment[] = second.pathSegaments;
+
+      for (
+        let i = 0;
+        i < Math.min(firstPaths.length, secondPaths.length);
+        i++
+      ) {
+        if (firstPaths[i].pathName < secondPaths[i].pathName) {
+          return -1;
+        }
+        if (firstPaths[i].pathName > secondPaths[i].pathName) {
+          return 1;
+        }
+      }
+
+      return 0;
+    });
 };
 
 export default function RootLayout({
@@ -33,7 +54,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar searchData={searchData} />
-        {children}
+        <div className="pt-16">{children}</div>
       </body>
     </html>
   );
