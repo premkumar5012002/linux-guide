@@ -3,30 +3,33 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 
 import { Lesson, allLessons } from "contentlayer/generated";
 
-const getLessons = (slug: string | string[] | undefined) => {
-  const path = typeof slug === "string" ? slug : slug?.join("/") ?? "";
-  return allLessons.find((lesson) => {
-    return (
-      lesson.url_path === (path.length > 0 ? `/lesson/${path}` : "/lesson")
-    );
-  });
+const getLessonData = (path: string) => {
+  const lesson = allLessons.find((lesson) => lesson.url_path === path);
+  if (!lesson) notFound();
+  return lesson;
 };
 
-export default async function Page({
+export default function Page({
   params,
 }: {
   params: {
-    slug: string | string[] | undefined;
+    slug: undefined | string | string[];
   };
 }) {
-  const data = getLessons(params.slug);
+  let slug = "/lesson";
 
-  if (data === undefined) notFound();
+  if (typeof params.slug === "string") {
+    slug = `/lesson/${params.slug}`;
+  } else if (Array.isArray(params.slug)) {
+    slug = `/lesson/${params.slug.join("/")}`;
+  }
+
+  const lesson = getLessonData(slug);
 
   return (
-    <main>
-      <article className="max-w-2xl mx-auto lg:mx-0">
-        <LinuxLesson data={data} />
+    <main className="max-w-2xl mx-auto lg:mx-0">
+      <article>
+        <LinuxLesson data={lesson} />
       </article>
     </main>
   );

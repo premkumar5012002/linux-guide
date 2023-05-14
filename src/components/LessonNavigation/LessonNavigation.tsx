@@ -1,19 +1,13 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import classNames from "classnames";
 import { usePathname } from "next/navigation";
+import { FC, useEffect, useState } from "react";
+import { ChevronDown, ChevronRight } from "tabler-icons-react";
 
 import { TreeNode } from "@/types/TreeNode";
-import {
-  ArrowDown,
-  ArrowDownTail,
-  ChevronDown,
-  ChevronRight,
-  ChevronUp,
-  ChevronsRight,
-} from "tabler-icons-react";
+import { firstLetterToUpperCase } from "@/utils/string";
 
 function LessonNavigation({ treeNode }: { treeNode: TreeNode[] }) {
   return (
@@ -149,12 +143,5 @@ const NavLink: FC<{
     </div>
   );
 };
-
-function firstLetterToUpperCase(string: string) {
-  return string
-    .split("-")
-    .map((text) => text.charAt(0).toUpperCase() + text.slice(1))
-    .join(" ");
-}
 
 export default LessonNavigation;

@@ -1,23 +1,23 @@
 import { TreeNode } from "@/types/TreeNode";
-import { allLessons } from "contentlayer/generated";
 import { PathSegment } from "@/types/PathSegment";
+import { allLessons } from "contentlayer/generated";
 
-function sortTreeNode(treeNode: TreeNode[]) {
-  treeNode.sort((a, b) => a.order - b.order);
+export function buildLessonTreeNode() {
+  const treeNode: TreeNode[] = [];
 
-  treeNode.forEach((node) => {
-    sortTreeNode(node.children);
+  allLessons.forEach((lesson) => {
+    const pathSegments = lesson.pathSegments;
+
+    let parentNode: TreeNode | undefined;
+
+    pathSegments.forEach((pathSegament: PathSegment) => {
+      parentNode = findOrCreateNode(pathSegament, treeNode, parentNode);
+    });
   });
-}
 
-function findLesson(pathName: string) {
-  return allLessons.find(
-    (lesson) => lesson.pathSegments.at(-1).pathName === pathName
-  );
-}
+  sortTreeNode(treeNode);
 
-function findNode(treeNode: TreeNode[], pathSegament: PathSegment) {
-  return treeNode.find((node) => node.pathName === pathSegament.pathName);
+  return treeNode;
 }
 
 function findOrCreateNode(
@@ -48,20 +48,20 @@ function findOrCreateNode(
   return node;
 }
 
-export function buildLessonTree() {
-  const treeNode: TreeNode[] = [];
+function findNode(treeNode: TreeNode[], pathSegament: PathSegment) {
+  return treeNode.find((node) => node.pathName === pathSegament.pathName);
+}
 
-  allLessons.forEach((lesson) => {
-    const pathSegments = lesson.pathSegments;
+function findLesson(pathName: string) {
+  return allLessons.find(
+    (lesson) => lesson.pathSegments.at(-1).pathName === pathName
+  );
+}
 
-    let parentNode: TreeNode | undefined;
+function sortTreeNode(treeNode: TreeNode[]) {
+  treeNode.sort((a, b) => a.order - b.order);
 
-    pathSegments.forEach((pathSegament: PathSegment) => {
-      parentNode = findOrCreateNode(pathSegament, treeNode, parentNode);
-    });
+  treeNode.forEach((node) => {
+    sortTreeNode(node.children);
   });
-
-  sortTreeNode(treeNode);
-
-  return treeNode;
 }
