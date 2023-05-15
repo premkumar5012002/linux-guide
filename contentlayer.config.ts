@@ -1,5 +1,8 @@
+import remarkGfm from "remark-gfm";
+import highlight from "rehype-highlight";
+
 import { urlFromFilePath } from "./src/utils/contentlayer";
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import { defineDocumentType, makeSource } from "@contentlayer/source-files";
 
 const Lesson = defineDocumentType(() => ({
   name: "Lesson",
@@ -44,4 +47,8 @@ const Lesson = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: "lessons",
   documentTypes: [Lesson],
+  mdx: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [highlight],
+  },
 });

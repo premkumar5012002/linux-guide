@@ -20,8 +20,6 @@ function LessonNavigation({ treeNode }: { treeNode: TreeNode[] }) {
 const Tree: FC<{ tree: TreeNode[]; level: number }> = ({ tree, level }) => {
   const activePath = usePathname();
 
-  if (activePath === null) return null;
-
   return (
     <div
       className={classNames(
@@ -97,16 +95,19 @@ const NavLink: FC<{
   collapsible,
   toggleCollapsed,
 }) => {
+  const activeClass = `text-white text-sm font-medium bg-accent shadow-md w-full px-2.5 py-1.5 rounded-md border border-outline-accent`;
+
+  const inActiveClass = `text-sm font-medium hover:bg-accent w-full px-2.5 py-1.5 rounded-md border border-transparent ${
+    level === 0 ? "text-white" : "text-gray-300"
+  }`;
+
   return url ? (
     <Link
+      scroll={true}
       href={url}
       className={classNames(
         "flex items-center justify-between",
-        activePath === url
-          ? `text-white text-sm font-medium bg-accent shadow-md w-full px-2.5 py-1.5 rounded-md border border-outline-accent`
-          : `text-sm font-medium hover:bg-accent w-full px-2.5 py-1.5 rounded-md border border-transparent ${
-              level === 0 ? "text-white" : "text-gray-300"
-            }`
+        activePath === url ? activeClass : inActiveClass
       )}
     >
       <span>{label}</span>

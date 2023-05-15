@@ -8,6 +8,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)"],
+        mono: ["var(--font-fira-code)"],
+      },
       colors: {
         accent: "#26262A",
         outline: "#262828",
