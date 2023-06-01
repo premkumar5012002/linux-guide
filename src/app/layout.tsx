@@ -1,13 +1,13 @@
 import { Inter, Fira_Code } from "next/font/google";
 
-import Navbar from "@/components/Navbar/Navbar";
-
-import { Search } from "@/types/Search";
-import { allLessons } from "contentlayer/generated";
-
-import "../../styles/globals.css";
 import "../../styles/prose.css";
+import "../../styles/globals.css";
 import "../../styles/highlight.css";
+
+import { StoreInitializer } from "@/store/storeInitializer";
+import { buildLessonTreeNode } from "@/utils/buildLessonTee";
+
+import Navbar from "@/components/Navbar/Navbar";
 
 export const metadata = {
   title: "Linux Guide",
@@ -26,26 +26,13 @@ export const fira_code = Fira_Code({
   display: "swap",
 });
 
-const getSearchData = (): Search[] => {
-  return allLessons.map((lesson) => {
-    return {
-      title: lesson.title,
-      url: lesson.url_path,
-      pathSegaments: lesson.pathSegments,
-    };
-  });
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const searchData = getSearchData();
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const treeNode = buildLessonTreeNode();
   return (
     <html lang="en" className={`${inter.variable} ${fira_code.variable}`}>
       <body>
-        <Navbar searchData={searchData} />
+        <StoreInitializer lessons={treeNode} />
+        <Navbar />
         <div className="pt-16">{children}</div>
       </body>
     </html>

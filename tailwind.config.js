@@ -13,10 +13,9 @@ module.exports = {
         mono: ["var(--font-fira-code)"],
       },
       colors: {
-        accent: "#26262A",
-        outline: "#262828",
-        background: "#18181A",
-        "outline-accent": "#3B3B3F",
+        primary: "#18181A",
+        secondary: "#26262A",
+        outline: "#3B3B3F",
       },
     },
   },

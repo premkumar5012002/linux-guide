@@ -23,7 +23,7 @@
 }
 
 .prose p {
-  @apply text-gray-200 py-1;
+  @apply text-gray-300 py-1;
   font-size: 1rem;
   line-height: 1.8rem;
 }
@@ -32,8 +32,8 @@
   @apply text-white font-bold underline;
 }
 
-.prose pre {
-  @apply bg-accent p-4 rounded-md border border-outline-accent overflow-auto my-4;
+.prose blockquote {
+  @apply border-l-4 border-outline pl-4 bg-secondary my-4;
 }
 
 .prose ul {
@@ -48,14 +48,30 @@
   @apply py-2 text-gray-300;
 }
 
+.prose pre {
+  @apply bg-secondary p-4 rounded-md overflow-auto my-6 shadow-md border border-outline;
+}
+
 .prose code {
-  @apply text-white text-sm bg-accent px-2 py-0.5 rounded-md shadow-md border border-outline-accent whitespace-nowrap;
+  @apply text-white font-medium whitespace-nowrap bg-secondary px-1 py-0.5 text-sm border border-outline rounded;
 }
 
 .prose pre code {
-  @apply text-sm bg-transparent rounded-none shadow-none border-none p-0 whitespace-pre;
+  @apply text-sm text-gray-200 bg-transparent rounded-none shadow-none border-none p-0 whitespace-pre;
 }
 
-.prose blockquote {
-  @apply border-l-4 border-accent pl-4 bg-accent my-4;
+.prose table {
+  @apply whitespace-nowrap md:whitespace-normal;
+}
+
+.prose table thead {
+  @apply bg-secondary;
+}
+
+.prose table thead tr th {
+  @apply px-6 py-3 text-gray-300 text-start;
+}
+
+.prose table tbody tr td {
+  @apply px-6 py-3 text-white font-medium border-b border-outline;
 }

@@ -20,21 +20,19 @@ export function buildLessonTreeNode() {
   return treeNode;
 }
 
-function findOrCreateNode(
-  pathSegament: PathSegment,
-  treeNode: TreeNode[],
-  parentNode?: TreeNode
-) {
+function findOrCreateNode(pathSegament: PathSegment, treeNode: TreeNode[], parentNode?: TreeNode) {
   let node: TreeNode | undefined = findNode(treeNode, pathSegament);
 
   if (node === undefined) {
     const lesson = findLesson(pathSegament.pathName);
 
     node = {
-      order: pathSegament.order,
-      label: lesson?.label ?? pathSegament.pathName,
+      title: lesson?.title,
       urlPath: lesson?.url_path,
+      order: pathSegament.order,
       pathName: pathSegament.pathName,
+      label: lesson?.label ?? pathSegament.pathName,
+      pathSegments: lesson?.pathSegments,
       children: [],
     };
 
@@ -53,9 +51,7 @@ function findNode(treeNode: TreeNode[], pathSegament: PathSegment) {
 }
 
 function findLesson(pathName: string) {
-  return allLessons.find(
-    (lesson) => lesson.pathSegments.at(-1).pathName === pathName
-  );
+  return allLessons.find((lesson) => lesson.pathSegments.at(-1).pathName === pathName);
 }
 
 function sortTreeNode(treeNode: TreeNode[]) {
