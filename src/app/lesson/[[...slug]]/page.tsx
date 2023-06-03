@@ -28,9 +28,7 @@ export default function Page({
 
   return (
     <main className="max-w-2xl mx-auto lg:mx-0">
-      <article>
-        <Mdx data={lesson} />
-      </article>
+      <Mdx data={lesson} />
     </main>
   );
 }

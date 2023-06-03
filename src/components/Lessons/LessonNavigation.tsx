@@ -24,7 +24,7 @@ const Tree: FC<{ tree: TreeNode[]; level: number }> = ({ tree, level }) => {
   const activePath = usePathname();
 
   return (
-    <div className={classNames(level === 0 ? "space-y-2" : "border-l border-outline space-y-2 ml-3 pl-2.5")}>
+    <div className={classNames(level === 0 ? "space-y-3" : "border-l border-outline space-y-2 ml-3 pl-2.5")}>
       {tree.map((treeNode, index) => (
         <Node key={index} level={level} node={treeNode} activePath={activePath} />
       ))}
@@ -82,11 +82,11 @@ const NavLink: FC<{
   };
 
   const activeClass = classNames(
-    "flex items-center justify-between text-white text-sm font-medium bg-secondary shadow-md w-full px-2.5 rounded-md border border-outline"
+    "flex items-center justify-between text-white font-medium bg-secondary shadow-md w-full px-2.5 rounded-md border border-outline"
   );
 
   const inActiveClass = classNames(
-    "flex items-center justify-between text-sm font-medium hover:bg-secondary w-full px-2.5 rounded-md border border-transparent",
+    "flex items-center justify-between font-medium hover:bg-secondary w-full px-2.5 rounded-md border border-transparent",
     level === 0 ? "text-white" : "text-gray-300"
   );
 
@@ -96,7 +96,7 @@ const NavLink: FC<{
         {label}
       </Link>
       {collapsible && (
-        <button type="button" title="Toggle Collapsed" onClick={toggleCollapsed}>
+        <button className="p-1.5" type="button" title="Toggle Collapsed" onClick={toggleCollapsed}>
           {collapsed ? <IconChevronRight className="w-5 h-5" /> : <IconChevronDown className="w-5 h-5" />}
         </button>
       )}

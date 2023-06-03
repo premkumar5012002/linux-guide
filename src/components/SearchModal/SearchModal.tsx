@@ -34,7 +34,7 @@ const variants = {
 };
 
 const getFilteredTreeNode = (search: String, treeNode: TreeNode): TreeNode | null => {
-  const isMatch = treeNode.title?.toLowerCase().includes(search.toLowerCase());
+  const isMatch = treeNode.label.toLowerCase().includes(search.toLowerCase());
 
   const filteredNodes: TreeNode[] = treeNode.children
     .map((node) => getFilteredTreeNode(search, node))
@@ -90,7 +90,7 @@ export default function SearchModal({ close }: { close: () => void }) {
               <IconX className="w-5 h-5" />
             </button>
           </div>
-          <div className="flex flex-col gap-1 py-4 h-96 overflow-y-auto bg-primary rounded-b-md px-4">
+          <div className="flex flex-col gap-1 py-4 h-96 overflow-y-auto bg-primary rounded-b-md px-2 lg:px-4">
             {filteredNodes.map((lesson) => (
               <LessonLink key={lesson.urlPath} lesson={lesson} close={close} />
             ))}
@@ -106,17 +106,17 @@ function LessonLink({ lesson, close, level = 0 }: { lesson: TreeNode; close: () 
     href: lesson.urlPath,
     onClick: close,
     className: classNames(
-      "flex gap-2 hover:bg-secondary py-3 px-4 rounded-md",
+      "flex items-center gap-2 hover:bg-secondary py-3 px-4 rounded-md",
       level === 0 ? "text-white" : "text-gray-300"
     ),
   };
   return (
-    <div className="flex flex-col gap-1">
+    <div className="space-y-1">
       <Link {...LinkProps}>
         <IconFileText />
-        <p className="font-medium">{lesson.title}</p>
+        <p className="font-medium text-sm lg:text-base">{lesson.label}</p>
       </Link>
-      <div className="flex flex-col gap-1 ml-7 px-4 border-l border-outline">
+      <div className="flex flex-col gap-1 ml-7 px-3 border-l border-outline">
         {lesson.children.map((lesson) => (
           <LessonLink key={lesson.urlPath} lesson={lesson} close={close} level={level + 1} />
         ))}
