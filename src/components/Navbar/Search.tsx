@@ -21,7 +21,7 @@ export default function Search() {
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [searchModal.isOpen]);
+  }, [searchModal]);
 
   return (
     <>
