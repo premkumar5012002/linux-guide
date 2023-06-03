@@ -5,9 +5,10 @@ import "../../styles/globals.css";
 import "../../styles/highlight.css";
 
 import { StoreInitializer } from "@/store/storeInitializer";
-import { buildLessonTreeNode } from "@/utils/buildLessonTee";
+import { buildLessonTree } from "@/utils/buildLessonTee";
 
 import Navbar from "@/components/Navbar/Navbar";
+import { allLessons } from "contentlayer/generated";
 
 export const metadata = {
   title: "Linux Guide",
@@ -27,7 +28,7 @@ export const fira_code = Fira_Code({
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const treeNode = buildLessonTreeNode();
+  const treeNode = buildLessonTree(allLessons);
   return (
     <html lang="en" className={`${inter.variable} ${fira_code.variable}`}>
       <body>

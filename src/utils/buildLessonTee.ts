@@ -1,63 +1,36 @@
+import { Lesson } from "contentlayer/generated";
+
 import { TreeNode } from "@/types/TreeNode";
 import { PathSegment } from "@/types/PathSegment";
-import { allLessons } from "contentlayer/generated";
 
-export function buildLessonTreeNode() {
-  const treeNode: TreeNode[] = [];
+export const buildLessonTree = (lessons: Lesson[], parentPathNames: string[] = []): TreeNode[] => {
+  const level = parentPathNames.length;
+  return lessons
+    .filter((_) => {
+      return (
+        _.pathSegments.length === level + 1 &&
+        _.pathSegments
+          .map((_: PathSegment) => _.pathName)
+          .join("/")
+          .startsWith(parentPathNames.join("/"))
+      );
+    })
+    .sort((a, b) => a.pathSegments[level].order - b.pathSegments[level].order)
+    .map<TreeNode>((lesson) => {
+      let children: TreeNode[] = [];
 
-  allLessons.forEach((lesson) => {
-    const pathSegments = lesson.pathSegments;
+      if (lesson.pathSegments[0]?.pathName !== "") {
+        children = buildLessonTree(
+          lessons,
+          lesson.pathSegments.map((_: PathSegment) => _.pathName)
+        );
+      }
 
-    let parentNode: TreeNode | undefined;
-
-    pathSegments.forEach((pathSegament: PathSegment) => {
-      parentNode = findOrCreateNode(pathSegament, treeNode, parentNode);
+      return {
+        title: lesson.title,
+        label: lesson.label,
+        urlPath: lesson.url_path,
+        children,
+      };
     });
-  });
-
-  sortTreeNode(treeNode);
-
-  return treeNode;
-}
-
-function findOrCreateNode(pathSegament: PathSegment, treeNode: TreeNode[], parentNode?: TreeNode) {
-  let node: TreeNode | undefined = findNode(treeNode, pathSegament);
-
-  if (node === undefined) {
-    const lesson = findLesson(pathSegament.pathName);
-
-    node = {
-      title: lesson?.title,
-      urlPath: lesson?.url_path,
-      order: pathSegament.order,
-      pathName: pathSegament.pathName,
-      label: lesson?.label ?? pathSegament.pathName,
-      pathSegments: lesson?.pathSegments,
-      children: [],
-    };
-
-    if (parentNode !== undefined) {
-      parentNode.children.push(node);
-    } else {
-      treeNode.push(node);
-    }
-  }
-
-  return node;
-}
-
-function findNode(treeNode: TreeNode[], pathSegament: PathSegment) {
-  return treeNode.find((node) => node.pathName === pathSegament.pathName);
-}
-
-function findLesson(pathName: string) {
-  return allLessons.find((lesson) => lesson.pathSegments.at(-1).pathName === pathName);
-}
-
-function sortTreeNode(treeNode: TreeNode[]) {
-  treeNode.sort((a, b) => a.order - b.order);
-
-  treeNode.forEach((node) => {
-    sortTreeNode(node.children);
-  });
-}
+};

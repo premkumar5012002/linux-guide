@@ -1,11 +1,8 @@
 import { PathSegment } from "./PathSegment";
 
 export type TreeNode = {
-  order: number;
-  title?: string;
+  title: string;
   label: string;
-  urlPath?: string;
-  pathName: string;
+  urlPath: string;
   children: TreeNode[];
-  pathSegments?: PathSegment[];
 };

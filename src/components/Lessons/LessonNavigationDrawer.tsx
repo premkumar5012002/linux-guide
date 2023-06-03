@@ -2,7 +2,7 @@
 
 import { useStore } from "@/store/globalStore";
 
-import LessonNavigation from "@/components/LessonNavigation/LessonNavigation";
+import LessonNavigation from "@/components/Lessons/LessonNavigation";
 
 export default function DrawerLessonNavigation() {
   const showDrawer = useStore((state) => state.showDrawer);
@@ -10,7 +10,7 @@ export default function DrawerLessonNavigation() {
   if (!showDrawer) return null;
 
   return (
-    <div className="fixed z-40 w-full lg:hidden bg-primary h-screen p-5 border-t border-outline overflow-y-scroll">
+    <div className="fixed z-40 w-full lg:hidden bg-primary h-[calc(100vh-65px)] p-5 border-t border-outline overflow-y-scroll">
       <LessonNavigation />
     </div>
   );

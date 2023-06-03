@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Menu2 } from "tabler-icons-react";
+import { ButtonHTMLAttributes } from "react";
+import { usePathname } from "next/navigation";
+import { IconMenu, IconX } from "@tabler/icons-react";
+
+import { useStore } from "@/store/globalStore";
 
 import Search from "@/components/Navbar/Search";
 import SocialLinks from "@/components/Navbar/SocailLinks";
-import { useStore } from "@/store/globalStore";
-import { ButtonHTMLAttributes } from "react";
-import { IconX } from "@tabler/icons-react";
-import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   return (
@@ -58,7 +58,7 @@ function DrawerButton() {
 
   return (
     <button {...ButtonProps} onClick={toggleDrawer}>
-      {showDrawer ? <IconX className="text-gray-300" /> : <Menu2 className="text-gray-300" />}
+      {showDrawer ? <IconX className="text-gray-300" /> : <IconMenu className="text-gray-300" />}
     </button>
   );
 }

@@ -3,11 +3,10 @@
 import Link from "next/link";
 import classNames from "classnames";
 import { usePathname } from "next/navigation";
+import { IconChevronDown, IconChevronRight } from "@tabler/icons-react";
 import { FC, useLayoutEffect, useState } from "react";
-import { ChevronDown, ChevronRight } from "tabler-icons-react";
 
 import { TreeNode } from "@/types/TreeNode";
-import { firstLetterToUpperCase } from "@/utils/string";
 
 import { useStore } from "@/store/globalStore";
 
@@ -63,7 +62,7 @@ const Node: FC<{ node: TreeNode; level: number; activePath: string }> = ({ node,
 };
 
 const NavLink: FC<{
-  url?: string;
+  url: string;
   level: number;
   label: string;
   activePath: string;
@@ -71,39 +70,34 @@ const NavLink: FC<{
   collapsible: boolean;
   toggleCollapsed: () => void;
 }> = ({ label, url, level, activePath, collapsed, collapsible, toggleCollapsed }) => {
+  const state = useStore((state) => ({
+    showDrawer: state.showDrawer,
+    toggleDrawer: state.toggleDrawer,
+  }));
+
+  const close = () => {
+    if (state.showDrawer) {
+      state.toggleDrawer();
+    }
+  };
+
   const activeClass = classNames(
-    "flex items-center justify-between text-white text-sm font-medium bg-secondary shadow-md w-full px-2.5 py-1.5 rounded-md border border-outline"
+    "flex items-center justify-between text-white text-sm font-medium bg-secondary shadow-md w-full px-2.5 rounded-md border border-outline"
   );
 
   const inActiveClass = classNames(
-    "flex items-center justify-between text-sm font-medium hover:bg-secondary w-full px-2.5 py-1.5 rounded-md border border-transparent",
+    "flex items-center justify-between text-sm font-medium hover:bg-secondary w-full px-2.5 rounded-md border border-transparent",
     level === 0 ? "text-white" : "text-gray-300"
   );
 
-  return url ? (
-    <Link href={url} scroll={true} className={activePath === url ? activeClass : inActiveClass}>
-      <span>{label}</span>
+  return (
+    <div className={activePath === url ? activeClass : inActiveClass}>
+      <Link href={url} className="w-full py-1.5" onClick={close}>
+        {label}
+      </Link>
       {collapsible && (
         <button type="button" title="Toggle Collapsed" onClick={toggleCollapsed}>
-          {collapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-        </button>
-      )}
-    </Link>
-  ) : (
-    <div
-      className={`flex items-center justify-between text-sm font-medium w-full px-2.5 py-1.5 rounded-md border border-transparent ${
-        level === 0 ? "text-white" : "text-gray-300"
-      }`}
-    >
-      <span>{firstLetterToUpperCase(label)}</span>
-      {collapsible && (
-        <button
-          type="button"
-          title="Toggle Collapsed"
-          className="hover:bg-secondary rounded-md p-1"
-          onClick={toggleCollapsed}
-        >
-          {collapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+          {collapsed ? <IconChevronRight className="w-5 h-5" /> : <IconChevronDown className="w-5 h-5" />}
         </button>
       )}
     </div>

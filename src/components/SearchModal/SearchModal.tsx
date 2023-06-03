@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { useState } from "react";
+import classNames from "classnames";
 import { motion } from "framer-motion";
-import { Search as SearchIcon, X } from "tabler-icons-react";
-
-import { useStore } from "@/store/globalStore";
+import { IconSearch, IconX, IconFileText } from "@tabler/icons-react";
 
 import { TreeNode } from "@/types/TreeNode";
-import { PathSegment } from "@/types/PathSegment";
-import { firstLetterToUpperCase } from "@/utils/string";
+
+import { useStore } from "@/store/globalStore";
 
 import { Backdrop } from "@/components/Common/Backdrop";
 
@@ -34,14 +33,33 @@ const variants = {
   },
 };
 
+const getFilteredTreeNode = (search: String, treeNode: TreeNode): TreeNode | null => {
+  const isMatch = treeNode.title?.toLowerCase().includes(search.toLowerCase());
+
+  const filteredNodes: TreeNode[] = treeNode.children
+    .map((node) => getFilteredTreeNode(search, node))
+    .filter((node): node is TreeNode => !!node);
+
+  if (isMatch || filteredNodes.length > 0) {
+    return {
+      title: treeNode.title,
+      label: treeNode.label,
+      urlPath: treeNode.urlPath,
+      children: filteredNodes,
+    };
+  }
+
+  return null;
+};
+
 export default function SearchModal({ close }: { close: () => void }) {
   const [search, setSearch] = useState("");
 
   const treeNode = useStore((state) => state.lessons);
 
-  const filteredLessons = treeNode.filter((lesson) => {
-    return lesson.label.toLowerCase().includes(search.toLowerCase());
-  });
+  const filteredNodes = treeNode
+    .map((node) => getFilteredTreeNode(search, node))
+    .filter((node): node is TreeNode => !!node);
 
   const MotionDivProps = {
     exit: "exit",
@@ -57,7 +75,7 @@ export default function SearchModal({ close }: { close: () => void }) {
         <div className="flex flex-col max-w-3xl w-full">
           <div className="flex items-center justify-between text-gray-300 border-b border-outline bg-primary px-6 py-4 rounded-t-md">
             <div className="flex items-center gap-4">
-              <SearchIcon className="w-6 h-6" />
+              <IconSearch className="w-6 h-6" />
               <input
                 autoFocus
                 type="text"
@@ -69,12 +87,12 @@ export default function SearchModal({ close }: { close: () => void }) {
               />
             </div>
             <button type="button" title="Close" onClick={close}>
-              <X className="w-5 h-5" />
+              <IconX className="w-5 h-5" />
             </button>
           </div>
-          <div className="flex flex-col gap-2 py-4 h-96 overflow-y-auto bg-primary rounded-b-md">
-            {filteredLessons.map((lesson) => (
-              <LessonLink key={lesson.pathName} lesson={lesson} />
+          <div className="flex flex-col gap-1 py-4 h-96 overflow-y-auto bg-primary rounded-b-md px-4">
+            {filteredNodes.map((lesson) => (
+              <LessonLink key={lesson.urlPath} lesson={lesson} close={close} />
             ))}
           </div>
         </div>
@@ -83,16 +101,26 @@ export default function SearchModal({ close }: { close: () => void }) {
   );
 }
 
-function LessonLink({ lesson }: { lesson: TreeNode }) {
-  if (!lesson.urlPath || !lesson.pathSegments) return null;
+function LessonLink({ lesson, close, level = 0 }: { lesson: TreeNode; close: () => void; level?: number }) {
+  const LinkProps = {
+    href: lesson.urlPath,
+    onClick: close,
+    className: classNames(
+      "flex gap-2 hover:bg-secondary py-3 px-4 rounded-md",
+      level === 0 ? "text-white" : "text-gray-300"
+    ),
+  };
   return (
-    <Link key={lesson.urlPath} href={lesson.urlPath} className="hover:bg-secondary px-6 py-2" onClick={close}>
-      <span className="text-sm text-gray-400">
-        {lesson.pathSegments?.length === 1
-          ? "Overview"
-          : lesson.pathSegments.slice(0, -1).map((segment: PathSegment) => firstLetterToUpperCase(segment.pathName))}
-      </span>
-      <h1 className="text-gray-200 font-medium">{lesson.title}</h1>
-    </Link>
+    <div className="flex flex-col gap-1">
+      <Link {...LinkProps}>
+        <IconFileText />
+        <p className="font-medium">{lesson.title}</p>
+      </Link>
+      <div className="flex flex-col gap-1 ml-7 px-4 border-l border-outline">
+        {lesson.children.map((lesson) => (
+          <LessonLink key={lesson.urlPath} lesson={lesson} close={close} level={level + 1} />
+        ))}
+      </div>
+    </div>
   );
 }
