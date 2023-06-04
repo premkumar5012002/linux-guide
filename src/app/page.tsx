@@ -67,7 +67,7 @@ export default async function Home() {
             <p className="text-white font-bold">Social Links</p>
             <Link
               target="_blank"
-              href="https://github.com/premkumar5012002"
+              href="https://github.com/premkumar5012002/linux-guide"
               className="flex items-center gap-1 text-gray-300 text-sm hover:underline"
             >
               <IconBrandGithub className="w-5 h-5" /> Github
