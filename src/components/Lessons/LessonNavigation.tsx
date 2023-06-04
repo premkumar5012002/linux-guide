@@ -3,8 +3,8 @@
 import Link from "next/link";
 import classNames from "classnames";
 import { usePathname } from "next/navigation";
-import { IconChevronDown, IconChevronRight } from "@tabler/icons-react";
 import { FC, useLayoutEffect, useState } from "react";
+import { IconChevronDown, IconChevronRight } from "@tabler/icons-react";
 
 import { TreeNode } from "@/types/TreeNode";
 
