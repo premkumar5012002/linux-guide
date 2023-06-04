@@ -43,9 +43,9 @@ function DrawerButton() {
   const pathname = usePathname();
   const isLesson = pathname.split("/").includes("lesson");
 
-  const { showDrawer, toggleDrawer } = useStore((state) => ({
-    showDrawer: state.showDrawer,
-    toggleDrawer: state.toggleDrawer,
+  const { showLessonDrawer, toggleLessonDrawer } = useStore((state) => ({
+    showLessonDrawer: state.showLessonDrawer,
+    toggleLessonDrawer: state.toggleLessonDrawer,
   }));
 
   if (!isLesson) return null;
@@ -57,8 +57,8 @@ function DrawerButton() {
   };
 
   return (
-    <button {...ButtonProps} onClick={toggleDrawer}>
-      {showDrawer ? <IconX className="text-gray-300" /> : <IconMenu className="text-gray-300" />}
+    <button {...ButtonProps} onClick={toggleLessonDrawer}>
+      {showLessonDrawer ? <IconX className="text-gray-300" /> : <IconMenu className="text-gray-300" />}
     </button>
   );
 }
