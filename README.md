@@ -17,4 +17,4 @@ The tech stack used in the development of the project includes:
 - [React](https://react.dev/) - A JavaScript library for building user interfaces.
 - [NextJS 13](https://nextjs.org/) - A React framework for building server-side rendered applications.
 - [Tailwind](https://tailwindcss.com/) - A utility-first CSS framework for rapid UI development.
-- [Contentlayer](https://tailwindcss.com/) - A SDK that validates and transforms your content into JSON.
+- [Contentlayer](https://www.contentlayer.dev/) - A SDK that validates and transforms your content into JSON.

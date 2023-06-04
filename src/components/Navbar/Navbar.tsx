@@ -2,29 +2,23 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ButtonHTMLAttributes } from "react";
 import { usePathname } from "next/navigation";
+import { ButtonHTMLAttributes } from "react";
 import { IconMenu, IconX } from "@tabler/icons-react";
 
 import { useStore } from "@/store/globalStore";
 
 import Search from "@/components/Navbar/Search";
-import SocialLinks from "@/components/Navbar/SocailLinks";
 
 export default function Navbar() {
   return (
-    <nav className="fixed z-50 px-4 border-b border-outline w-full bg-primary">
-      <div className="flex items-center justify-between max-w-screen-2xl m-auto h-16">
+    <nav className="fixed z-50 border-b border-outline w-full bg-primary">
+      <div className="flex items-center justify-between max-w-screen-2xl m-auto h-16 px-4">
         <div className="flex items-center gap-3">
           <DrawerButton />
           <LinuxGuideLogo />
         </div>
-        <div className="flex items-center divide-x divide-gray-600">
-          <div className="mr-4">
-            <Search />
-          </div>
-          <SocialLinks />
-        </div>
+        <Search />
       </div>
     </nav>
   );
