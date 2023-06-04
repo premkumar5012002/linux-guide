@@ -1,5 +1,5 @@
 import remarkGfm from "remark-gfm";
-import highlight from "rehype-highlight";
+import rehypePrism from "@mapbox/rehype-prism";
 
 import { urlFromFilePath } from "./src/utils/contentlayer";
 import { defineDocumentType, makeSource } from "@contentlayer/source-files";
@@ -49,6 +49,6 @@ export default makeSource({
   documentTypes: [Lesson],
   mdx: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [highlight],
+    rehypePlugins: [rehypePrism],
   },
 });

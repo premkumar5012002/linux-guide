@@ -57,7 +57,7 @@
 }
 
 .prose pre code {
-  @apply text-sm text-gray-200 bg-transparent rounded-none shadow-none border-none p-0 whitespace-pre;
+  @apply text-sm text-gray-300 bg-transparent rounded-none shadow-none border-none p-0 whitespace-pre;
 }
 
 .prose table {

@@ -12,7 +12,7 @@ export default async function Home() {
         <div className="space-y-3 lg:space-y-4">
           <Image src="/linux.svg" alt="Linux" width={140} height={140} className="mx-auto" />
           <p className="text-3xl lg:text-4xl font-bold text-white">Linux Guide</p>
-          <p className="text-xl lg:text-2xl text-gray-300">Where Penguins Rule and Command Lines Reign!</p>
+          <p className="text-xl lg:text-2xl text-gray-300">Learning Hub Guiding Beginners on their Linux Adventure</p>
         </div>
         <Link href="/lesson/getting-started" className="text-lg font-semibold bg-white px-8 py-3 rounded">
           Start Learning

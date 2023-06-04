@@ -66,7 +66,7 @@ export default function SearchModal({ close }: { close: () => void }) {
     initial: "hidden",
     animate: "visible",
     variants: variants,
-    className: "fixed z-50 inset-0 w-full flex justify-center bg-[#000000E1] py-12 px-4",
+    className: "fixed z-50 inset-0 w-full flex justify-center bg-[#000000E1] md:py-12 md:px-4",
   };
 
   return (
@@ -90,7 +90,7 @@ export default function SearchModal({ close }: { close: () => void }) {
               <IconX className="w-5 h-5" />
             </button>
           </div>
-          <div className="flex flex-col gap-1 py-4 h-96 overflow-y-auto bg-primary rounded-b-md px-2 lg:px-4">
+          <div className="flex flex-col gap-1 py-4 h-full md:h-96 overflow-y-auto bg-primary rounded-b-md px-2 lg:px-4">
             {filteredNodes.map((lesson) => (
               <LessonLink key={lesson.urlPath} lesson={lesson} close={close} />
             ))}

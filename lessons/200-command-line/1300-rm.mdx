@@ -5,7 +5,7 @@ label: rm (Remove)
 
 Now I think we have too many files, let’s remove some files. To remove files you can use the rm command. The rm (remove) command is used to delete files and directories.
 
-```bash
+```shell
 $ rm file1
 ```
 
@@ -15,19 +15,19 @@ Fortunately there are some safety measures put into place, so the average joe ca
 
 Now if you don’t care about any of that, you can absolutely remove a bunch of files.
 
-```bash
+```shell
 $ rm -f file1
 ```
 
 -f or force option tells rm to remove all files, whether they are write protected or not, without prompting the user (as long as you have the appropriate permissions).
 
-```bash
-$ rm -i file
+```shell
+$ rm -i file2
 ```
 
 Adding the -i flag like many of the other commands, will give you a prompt on whether you want to actually remove the files or directories.
 
-```bash
+```shell
 $ rm -r directory
 ```
 
@@ -35,6 +35,6 @@ You can’t just rm a directory by default, you’ll need to add the -r flag (re
 
 You can remove a directory with the rmdir command.
 
-```bash
+```shell
 $ rmdir directory
 ```
