@@ -35,11 +35,12 @@ function LinuxGuideLogo() {
 
 function DrawerButton() {
   const pathname = usePathname();
+
   const isLesson = pathname.split("/").includes("lesson");
 
-  const { showLessonDrawer, toggleLessonDrawer } = useStore((state) => ({
-    showLessonDrawer: state.showLessonDrawer,
-    toggleLessonDrawer: state.toggleLessonDrawer,
+  const { drawerState, toggleDrawerState } = useStore((state) => ({
+    drawerState: state.drawerState,
+    toggleDrawerState: state.toggleDrawerState,
   }));
 
   if (!isLesson) return null;
@@ -51,8 +52,8 @@ function DrawerButton() {
   };
 
   return (
-    <button {...ButtonProps} onClick={toggleLessonDrawer}>
-      {showLessonDrawer ? <IconX className="text-gray-300" /> : <IconMenu className="text-gray-300" />}
+    <button {...ButtonProps} onClick={toggleDrawerState}>
+      {drawerState ? <IconX className="text-gray-300" /> : <IconMenu className="text-gray-300" />}
     </button>
   );
 }

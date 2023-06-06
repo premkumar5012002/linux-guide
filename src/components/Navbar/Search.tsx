@@ -3,10 +3,10 @@ import { ButtonHTMLAttributes, useEffect } from "react";
 
 import { useModal } from "@/hooks/useModal";
 
-import SearchModal from "@/components/SearchModal/SearchModal";
+import Search from "@/components/Search/Search";
 import ModalContainer from "@/components/Common/ModalContainer";
 
-export default function Search() {
+export default function NavSearch() {
   const searchModal = useModal();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function Search() {
   return (
     <>
       <ModalContainer isModelOpen={searchModal.isOpen} onClose={searchModal.closeModal}>
-        <SearchModal close={searchModal.closeModal} />
+        <Search close={searchModal.closeModal} />
       </ModalContainer>
       <SearchBox onClick={searchModal.openModal} />
       <SearchButton onClick={searchModal.openModal} />

@@ -37,11 +37,11 @@
 }
 
 .prose ul {
-  @apply list-disc pl-4;
+  @apply list-disc pl-4 my-4;
 }
 
 .prose ol {
-  @apply list-decimal pl-4;
+  @apply list-decimal pl-4 my-4;
 }
 
 .prose li {

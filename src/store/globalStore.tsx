@@ -1,19 +1,28 @@
 import { create } from "zustand";
+
 import { TreeNode } from "@/types/TreeNode";
 
 type State = {
   lessons: TreeNode[];
-  showLessonDrawer: boolean;
+  drawerState: boolean;
+  totalExerciseState: number;
+  currentExerciseState: number;
 };
 
 type Actions = {
-  toggleLessonDrawer: () => void;
+  toggleDrawerState: () => void;
   hydrateStore: (lessons: TreeNode[]) => void;
+  setTotalExerciseState: (value: number) => void;
+  setCurrentExerciseState: (value: number) => void;
 };
 
 export const useStore = create<State & Actions>((set) => ({
   lessons: [],
-  showLessonDrawer: false,
+  drawerState: false,
+  totalExerciseState: 0,
+  currentExerciseState: 0,
   hydrateStore: (lessons) => set(() => ({ lessons })),
-  toggleLessonDrawer: () => set((prev) => ({ showLessonDrawer: !prev.showLessonDrawer })),
+  toggleDrawerState: () => set((prev) => ({ drawerState: !prev.drawerState })),
+  setTotalExerciseState: (value: number) => set(() => ({ totalExerciseState: value })),
+  setCurrentExerciseState: (value: number) => set(() => ({ currentExerciseState: value })),
 }));

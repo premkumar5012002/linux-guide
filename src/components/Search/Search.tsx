@@ -8,7 +8,7 @@ import { TreeNode } from "@/types/TreeNode";
 
 import { useStore } from "@/store/globalStore";
 
-import { Backdrop } from "@/components/Common/Backdrop";
+import Backdrop from "@/components/Common/Backdrop";
 
 const variants = {
   hidden: {
@@ -52,7 +52,7 @@ const getFilteredTreeNode = (search: String, treeNode: TreeNode): TreeNode | nul
   return null;
 };
 
-export default function SearchModal({ close }: { close: () => void }) {
+export default function Search({ close }: { close: () => void }) {
   const [search, setSearch] = useState("");
 
   const treeNode = useStore((state) => state.lessons);
@@ -66,35 +66,34 @@ export default function SearchModal({ close }: { close: () => void }) {
     initial: "hidden",
     animate: "visible",
     variants: variants,
-    className: "fixed z-50 inset-0 w-full flex justify-center bg-[#000000E1] md:py-12 md:px-4",
+    className: "overflow-y-auto md:max-w-2xl w-full",
   };
 
   return (
     <Backdrop onClick={close}>
       <motion.div {...MotionDivProps} onClick={(e: React.MouseEvent<HTMLElement>) => e.stopPropagation()}>
-        <div className="flex flex-col max-w-3xl w-full">
-          <div className="flex items-center justify-between text-gray-300 border-b border-outline bg-primary px-6 py-4 rounded-t-md">
-            <div className="flex items-center gap-4">
-              <IconSearch className="w-6 h-6" />
-              <input
-                autoFocus
-                type="text"
-                title="Search"
-                value={search}
-                placeholder="Search..."
-                className="w-full bg-transparent outline-none"
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
-            <button type="button" title="Close" onClick={close}>
-              <IconX className="w-5 h-5" />
-            </button>
+        <div className="flex items-center justify-between text-gray-300 border-b border-outline bg-primary px-6 py-4 md:rounded-t-md">
+          <div className="flex items-center gap-4">
+            <IconSearch className="w-6 h-6" />
+            <input
+              autoFocus
+              type="text"
+              title="Search"
+              value={search}
+              placeholder="Search..."
+              autoCapitalize="none"
+              className="w-full bg-transparent outline-none"
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
-          <div className="flex flex-col gap-1 py-4 h-full md:h-96 overflow-y-auto bg-primary rounded-b-md px-2 lg:px-4">
-            {filteredNodes.map((lesson) => (
-              <LessonLink key={lesson.urlPath} lesson={lesson} close={close} />
-            ))}
-          </div>
+          <button type="button" title="Close" onClick={close}>
+            <IconX className="w-5 h-5" />
+          </button>
+        </div>
+        <div className="flex flex-col gap-1 py-4 h-[calc(100svh-57px)] md:h-[480px] overflow-y-auto bg-primary md:rounded-b-md px-2 lg:px-4">
+          {filteredNodes.map((lesson) => (
+            <LessonLink key={lesson.urlPath} lesson={lesson} close={close} />
+          ))}
         </div>
       </motion.div>
     </Backdrop>

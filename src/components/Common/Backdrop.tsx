@@ -5,12 +5,12 @@ interface BackdropProps extends PropsWithChildren {
   onClick: () => void;
 }
 
-export const Backdrop = ({ children, onClick }: BackdropProps) => {
+const Backdrop = ({ children, onClick }: BackdropProps) => {
   const MotionDivProps = {
     exit: { opacity: 0 },
     initial: { opacity: 0 },
     animate: { opacity: 1 },
-    className: "fixed z-50 inset-0 w-full bg-[#000000E1]",
+    className: "fixed z-50 inset-0 flex justify-center items-center bg-[#000000E1]",
   };
 
   return (
@@ -19,3 +19,5 @@ export const Backdrop = ({ children, onClick }: BackdropProps) => {
     </motion.div>
   );
 };
+
+export default Backdrop;

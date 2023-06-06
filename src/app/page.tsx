@@ -6,8 +6,7 @@ import { IconBrandGithub } from "@tabler/icons-react";
 
 export default async function Home() {
   return (
-    <main className="h-[calc(100vh-65px)]">
-      {/* Intro */}
+    <main>
       <div className="py-16 lg:py-20 flex flex-col items-center justify-center gap-10 lg:gap-12 text-center bg-secondary px-8">
         <div className="space-y-3 lg:space-y-4">
           <Image src="/linux.svg" alt="Linux" width={140} height={140} className="mx-auto" />
@@ -18,7 +17,6 @@ export default async function Home() {
           Start Learning
         </Link>
       </div>
-      {/* Lessons */}
       <div className="max-w-screen-2xl m-auto px-4">
         <div className="pt-16 space-y-16">
           <h3 className="text-center text-3xl font-bold text-white">Linux Commands</h3>
@@ -45,10 +43,8 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      {/* Footer */}
       <footer className="bg-secondary">
         <div className="flex flex-col md:flex-row items-start gap-8 justify-between max-w-screen-2xl m-auto px-4 py-8">
-          {/* Info */}
           <div className="space-y-2.5">
             <Link href="/" className="flex items-center gap-2">
               <Image src="/linux.svg" alt="Linux Guide Logo" width={35} height={35} />
@@ -62,7 +58,6 @@ export default async function Home() {
               </Link>
             </p>
           </div>
-          {/* Links */}
           <div className="space-y-2.5">
             <p className="text-white font-bold">Social Links</p>
             <Link
