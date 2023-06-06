@@ -71,13 +71,13 @@ const NavLink: FC<{
   toggleCollapsed: () => void;
 }> = ({ label, url, level, activePath, collapsed, collapsible, toggleCollapsed }) => {
   const state = useStore((state) => ({
-    showLessonDrawer: state.showLessonDrawer,
-    toggleLessonDrawer: state.toggleLessonDrawer,
+    drawerState: state.drawerState,
+    toggleDrawerState: state.toggleDrawerState,
   }));
 
   const close = () => {
-    if (state.showLessonDrawer) {
-      state.toggleLessonDrawer();
+    if (state.drawerState) {
+      state.toggleDrawerState();
     }
   };
 
