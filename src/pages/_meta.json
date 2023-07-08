@@ -1,0 +1,10 @@
+{
+	"index": {
+		"type": "page",
+		"title": "Linux Guide",
+		"display": "hidden",
+		"theme": {
+			"layout": "raw"
+		}
+	}
+}

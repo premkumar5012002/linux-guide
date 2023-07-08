@@ -1,0 +1,57 @@
+---
+title: Linux Guide
+---
+
+import Link from "next/link";
+import Image from "next/image";
+
+import { terminal } from "@/utils/lessons";
+
+<main>
+	<Splash />
+	<div className="max-w-screen-2xl m-auto px-4 pb-20">
+		<Lesson title="Linux Basics" lesson={terminal} />
+	</div>
+</main>
+
+export function Splash() {
+	return (
+		<div className="py-16 lg:py-20 flex flex-col items-center justify-center gap-10 lg:gap-12 text-center px-8 bg-secondary-light dark:bg-secondary-dark border-b border-outline-light dark:border-outline-dark">
+			<div className="space-y-3 lg:space-y-6 max-w-xl mx-auto">
+				<Image alt="Linux" width={160} height={160} src="/linux.svg" className="mx-auto" />
+				<h2 className="text-3xl lg:text-4xl font-bold">Linux Guide</h2>
+				<div className="text-xl lg:text-2xl text-gray-900 dark:text-gray-400">
+					Linux is a powerful operating system that can be customized to your specific needs.
+				</div>
+			</div>
+		</div>
+	);
+}
+
+export function Lesson(props) {
+	return (
+		<div className="pt-16 space-y-16">
+			<h3 className="text-center text-3xl font-bold">{props.title}</h3>
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+				{props.lesson.map((lesson) => (
+					<Card key={lesson.title} lesson={lesson} />
+				))}
+			</div>
+		</div>
+	);
+}
+
+export function Card(props) {
+	return (
+		<div className="bg-secondary-light dark:bg-secondary-dark p-6 rounded-md flex flex-col justify-between gap-8 border border-outline-light dark:border-outline-dark">
+			<div className="space-y-3.5">
+				<props.lesson.icon className="w-12 h-12" />
+				<div className="space-y-1">
+					<h4 className="text-xl font-bold">{props.lesson.title}</h4>
+					<p className="text-gray-900 dark:text-gray-400">{props.lesson.excerpt}</p>
+				</div>
+			</div>
+			<p className="underline">Learn More →</p>
+		</div>
+	);
+}
