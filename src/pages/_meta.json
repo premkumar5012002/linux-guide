@@ -1,0 +1,17 @@
+{
+	"index": {
+		"type": "page",
+		"display": "hidden",
+		"theme": {
+			"layout": "raw"
+		}
+	},
+	"lessons": {
+		"type": "page",
+		"title": "Lessons"
+	},
+	"about": {
+		"type": "page",
+		"title": "About"
+	}
+}
